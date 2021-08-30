@@ -111,27 +111,29 @@ namespace RubyDictation
 {
     class WebSocketRuby
     {
+        bool[] completeFlag = { false, false };
         const int MessageBufferSize = 1024*10;
         readonly Form1 form1;
         private Uri rubyUrl;
+
+        WebSocketReceiveResult received;
         //クライアント側のWebSocketを定義
         private readonly ClientWebSocket _ws = new();
 
         public WebSocketRuby(Form1 form1)
         {
             this.form1 = form1;
-            Debug.WriteLine(_ws.State);
         }
 
         public void SetUrl(Uri uri)
         {
             rubyUrl = uri;
-            Close(string.Empty);
+            // if (_ws.State == WebSocketState.Open) Close(string.Empty);
         }
 
         public async Task<ClientWebSocket> Connect()
         {
-            if (_ws.State != WebSocketState.Open)
+            if (_ws.State == WebSocketState.Closed || _ws.State == WebSocketState.None)
             {
                 //サーバに対し、接続を開始
                 await _ws.ConnectAsync(rubyUrl, CancellationToken.None);
@@ -145,9 +147,15 @@ namespace RubyDictation
             while (_ws.State == WebSocketState.Open)
                 {
                     var buff = new ArraySegment<byte>(new byte[MessageBufferSize]);
-                    var received = await _ws.ReceiveAsync(buff, CancellationToken.None);
-
-                    if (received.MessageType == WebSocketMessageType.Close)
+                try
+                {
+                    received = await _ws.ReceiveAsync(buff, CancellationToken.None);
+                }
+                catch (WebSocketException e)
+                {
+                    Debug.WriteLine(e);
+                }
+                if (received.MessageType == WebSocketMessageType.Close)
                     {
                         Close("OK");
                     }
@@ -164,7 +172,7 @@ namespace RubyDictation
                 {
                     json = JsonConvert.DeserializeObject<RubyResponse>(result);
                 }
-                catch (JsonReaderException e)
+                catch (JsonReaderException /*e*/)
                 {
                     // Debug.WriteLine(e);
                     Debug.WriteLine($"Rudy Dictation String: {result}");
@@ -175,6 +183,18 @@ namespace RubyDictation
                     Debug.WriteLine($"Rudy Dictation String: {result}");
                 }
 
+                if(json == null)
+                {
+                    completeFlag = new bool[] { false, false };
+                    Close(string.Empty);
+                    form1.inputAudioSettingGroupBox.Enabled = true;
+                    form1.settingTableLayoutPanel.Enabled = true;
+                    form1.recognizeButton.Enabled = true;
+                    form1.RecognizeStopButton.Enabled = false;
+                    form1.rubyPartial1.Text = "話者１: ";
+                    form1.rubyPartial2.Text = "話者２: ";
+                    continue;
+                }
                 Debug.WriteLine(json.AsrStatus);
                 Debug.WriteLine(result);
                 // Debug.WriteLine(json);
@@ -188,9 +208,9 @@ namespace RubyDictation
                     if (text == "") text = "(無音)";
 
                     if (ch == 0)
-                        form1.label1.Text = $"話者１: {text}";
+                        form1.rubyPartial1.Text = $"話者１: {text}";
                     else
-                        form1.label2.Text = $"話者２: {text}";
+                        form1.rubyPartial2.Text = $"話者２: {text}";
                 }
                 else if (asrStatus == "final")
                 {
@@ -204,6 +224,7 @@ namespace RubyDictation
                 }
                 else if (asrStatus == "complete")
                 {
+                    /*
                     if (json.Contexts[0].Text != "") form1.rubyConsole.AppendText($"complete: 話者: {ch + 1} --------------------\r\n");
 
                     foreach (RubyContext context in json.Contexts)
@@ -213,16 +234,27 @@ namespace RubyDictation
 
                         if (text != "") form1.rubyConsole.AppendText($"start: {start}, 話者: {ch + 1}, {text}\r\n");
                     }
-
                     if (json.Contexts[0].Text != "") form1.rubyConsole.AppendText("----------------------------------------\r\n");
-                }
+                    */
 
+                    completeFlag[ch] = true;
 
-                if (json.AsrStatus == "final" || json.AsrStatus == "complete")
-                {
-                    // Debug.WriteLine(result);
+                    if(ch==0) form1.rubyPartial1.Text = "話者１: (完了)";
+                    else form1.rubyPartial2.Text = "話者２: (完了)";
+
+                    if (completeFlag[0] == true && (completeFlag[1] == true || form1.ch1.Checked == true))
+                    {
+                        Debug.WriteLine("終わった");
+
+                        completeFlag = new bool[] { false, false };
+                        // Close(string.Empty);
+                        form1.inputAudioSettingGroupBox.Enabled = true;
+                        form1.settingTableLayoutPanel.Enabled = true;
+                        form1.recognizeButton.Enabled = true;
+                        form1.RecognizeStopButton.Enabled = false;
+                        if (form1.rubyConsole.Text == "") form1.rubyConsole.Text = "テキストなし";
+                    }
                 }
-                // rubyConsole.Text += result + "\r\n";
                 }
         }
 
@@ -235,6 +267,13 @@ namespace RubyDictation
                 true,
                 CancellationToken.None
                 );
+
+            if (data == "stop")
+            {
+                // stopped = true;
+                // Close(string.Empty);
+            }
+
             return "";
         }
 
@@ -254,12 +293,23 @@ namespace RubyDictation
         {
             if (_ws.State == WebSocketState.Open)
             {
-                await _ws.CloseAsync(
-                WebSocketCloseStatus.NormalClosure,
-                data,
-                CancellationToken.None
-                );
+                try {
+                    await _ws.CloseAsync(
+                    WebSocketCloseStatus.NormalClosure,
+                    data,
+                    CancellationToken.None
+                    );
+                }
+                catch (WebSocketException e)
+                {
+                    Debug.WriteLine(e);
+                }
             }
+        }
+
+        public  WebSocketState State()
+        {
+            return _ws.State;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace RubyDictation
             for (int i = 0; i < collection.Count; i++) Debug.WriteLine(collection[i]);
         }
 
-        public void setup()
+        public void Setup()
         {
 
             waveIn = new WaveInEvent();
@@ -47,6 +47,11 @@ namespace RubyDictation
                 // Debug.WriteLine($"{a.Buffer.Length}");
                 await wsr.SendBinary(a.Buffer);
             };
+        }
+
+        public void Stop()
+        {
+            waveIn.StopRecording();
         }
     }
 }

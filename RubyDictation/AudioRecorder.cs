@@ -15,8 +15,8 @@ namespace RubyDictation
     {
 
         private bool isRecording = false;
-        private WasapiLoopbackCapture capture;
-        private WaveOutEvent wo = new WaveOutEvent();
+        private readonly WasapiLoopbackCapture capture;
+        private readonly WaveOutEvent wo = new();
 
         private readonly WebSocketRuby wsr;
 
@@ -29,7 +29,7 @@ namespace RubyDictation
             for (int i = 0; i < collection.Count; i++) Debug.WriteLine(collection[i]);
         }
 
-        public bool setup()
+        public bool Setup()
         {
             bool isRecordSilence = true;
             if (isRecording)
@@ -47,7 +47,7 @@ namespace RubyDictation
                 {
                     writer = new WaveFileWriter("./wav.wav", capture.WaveFormat);
                 }
-                catch (DirectoryNotFoundException e)
+                catch (DirectoryNotFoundException/* e*/)
                 {
                     // MessageBox.Show("Folder Path was invalid.");
                     return false;
