@@ -51,7 +51,7 @@ namespace RubyDictation
 
         public void Stop()
         {
-            waveIn.StopRecording();
+            if(waveIn !=null) waveIn.StopRecording();
         }
     }
 }

@@ -84,7 +84,7 @@ namespace RubyDictation
             settingTableLayoutPanel.Enabled = false;
             recognizeButton.Enabled = false;
             resultTableLayoutPanel.Enabled = true;
-            RecognizeStopButton.Enabled = true;
+            RecognizeStopButton.Enabled = deviceAudioInput.Checked;
 
             rubyPartial1.Text = "話者１: ";
             rubyPartial2.Text = "話者２: ";
@@ -110,6 +110,7 @@ namespace RubyDictation
                 await wsr.SendText("complete");
 
                 nte.Send(data);
+                NteConsole.Text = "認識完了を待っています...";
             }
             else if (deviceAudioInput.Checked == true)
             {
