@@ -89,7 +89,8 @@ namespace RubyDictation
             rubyPartial1.Text = "話者１: ";
             rubyPartial2.Text = "話者２: ";
 
-            rubyConsole.Text = rubyConsole.Text = "";
+            rubyConsole.Text = "";
+            NteConsole.Text = "";
 
             Debug.WriteLine(wsr.State());
 
@@ -117,10 +118,16 @@ namespace RubyDictation
 
         }
 
+        public void setNteConsoleText(string text)
+        {
+            NteConsole.Text = text;
+        }
+
         private async void RecognizeStopButton_Click(object sender, EventArgs e)
         {
             audioRecorder.Stop();
-            await wsr.SendText("stop");
+            await wsr.SendText("complete");
+            // await wsr.SendText("stop");
         }
 
 
@@ -205,10 +212,16 @@ namespace RubyDictation
 
         private void DeviceAudioInput_CheckedChanged(object sender, EventArgs e)
         {
+            audioPath.Enabled = !deviceAudioInput.Checked;
+            selectButton.Enabled = !deviceAudioInput.Checked;
+
             formatGroupBox.Enabled = !deviceAudioInput.Checked;
             channelGroupBox.Enabled = !deviceAudioInput.Checked;
             bitGroupBox.Enabled = !deviceAudioInput.Checked;
             sampleRateGroupBox.Enabled = !deviceAudioInput.Checked;
+
+            nteGroupBox.Enabled = !deviceAudioInput.Checked;
+            nteResultGroupBox.Enabled = !deviceAudioInput.Checked;
 
             if (deviceAudioInput.Checked == true)
                 rubyFormat.Text = "format:pcm:16:16000:2";

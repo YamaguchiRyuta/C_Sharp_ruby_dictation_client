@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -26,6 +27,18 @@ namespace RubyDictation
             Debug.WriteLine("Listening...");
         }
 
+        private string getIp()
+        {
+            string result = "";
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                    result = ip.ToString();
+            }
+            return result;
+        }
+
         public void SetUrl(Uri uri)
         {
             nteUrl = uri;
@@ -37,7 +50,7 @@ namespace RubyDictation
             {
                 JobType = "batch_transcription",
                 OperatingMode = "fast",
-                CallbackUrl = "http://192.168.13.16:3000",
+                CallbackUrl = $"http://{getIp()}:3000",
                 Model = new Model
                 {
                     Name = "jpn-jpn"
@@ -75,7 +88,8 @@ namespace RubyDictation
             // Listen();
             // ListenHttp();
 
-            Task<string> task = Task.Run(() => {
+            Task<string> task = Task.Run(() =>
+            {
                 return ListenHttp();
             });
         }
@@ -151,6 +165,8 @@ namespace RubyDictation
             return "";
         }
 
+        delegate void Delegate(string text);
+
         private void OnRequested(IAsyncResult result)
         {
             HttpListener clsListener = (HttpListener)result.AsyncState;
@@ -163,11 +179,37 @@ namespace RubyDictation
             HttpListenerRequest req = context.Request;
             HttpListenerResponse res = context.Response;
 
-            if(req.HttpMethod == "POST")
+            if (req.HttpMethod == "POST")
             {
                 StreamReader reader = new(req.InputStream);
-                string reqBody = reader.ReadToEnd();
-                Debug.WriteLine(reqBody);
+                string resBody = reader.ReadToEnd();
+                // Debug.WriteLine(reqBody);
+                // var json = JsonConvert.DeserializeObject<NteResponse>(reqBody);
+                JObject json = JObject.Parse(resBody);
+
+                Debug.WriteLine(resBody);
+
+                string resultText = "";
+
+                var transcript = json["channels"]["firstChannelLabel"]["transcript"];
+                if (transcript != null)
+                {
+                    foreach (var x in transcript)
+                    {
+                        float start = (float)x["start"];
+                        int ch = (int)x["speaker"];
+                        string text = (string)x["text"];
+
+                        if (text != "")
+                            resultText += $"start: {start}, 話者: {ch}, {text}\r\n";
+                    }
+                }
+                if (resultText == "") resultText = "テキストなし";
+
+                if (form1.InvokeRequired)
+                    form1.Invoke(new Delegate(form1.setNteConsoleText), resultText);
+                else
+                    form1.NteConsole.Text = resultText;
             }
 
             try

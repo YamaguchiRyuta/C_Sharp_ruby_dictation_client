@@ -1,4 +1,7 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 
 [JsonObject("NteResponse")]
 class NteResponse
@@ -100,11 +103,13 @@ class Alignment{
 
 [JsonObject("lattice")]
 class Lattice {
+    /*
     [JsonProperty("1")]
     public string One {get;set;}
 
     [JsonProperty("2")]
     public string Two { get; set; }
+    */
 }
 
 [JsonObject("links")]
@@ -113,7 +118,46 @@ class Links
 
 }
 
-    [JsonObject("error")]
+[JsonObject("LatticeData")]
+class LatticeData
+{
+    [JsonProperty("source")]
+    public int Source { get; set; }
+
+    [JsonProperty("destination")]
+    public int Destination { get; set; }
+
+    [JsonProperty("start")]
+    public int Start { get; set; }
+
+    [JsonProperty("end")]
+    public int End { get; set; }
+
+    [JsonProperty("weight")]
+    public int Weight { get; set; }
+
+    [JsonProperty("word_confidence")]
+    public int WordConfidence { get; set; }
+
+    [JsonProperty("best_path")]
+    public int BestPath { get; set; }
+
+    [JsonProperty("speaker")]
+    public int Speaker { get; set; }
+
+    [JsonProperty("word")]
+    public int Word { get; set; }
+
+    [JsonProperty("intensity")]
+    public int Intensity { get; set; }
+
+    public static explicit operator LatticeData(KeyValuePair<string, JToken> v)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+[JsonObject("error")]
 class Error
 {
     [JsonProperty("message")]
