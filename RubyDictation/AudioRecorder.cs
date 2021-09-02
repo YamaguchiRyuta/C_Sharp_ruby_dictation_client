@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.IO;
+﻿using NAudio.CoreAudioApi;
 using NAudio.Wave;
-using System.Threading;
 using NAudio.Wave.SampleProviders;
-using NAudio.CoreAudioApi;
+using System;
 using System.Diagnostics;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace RubyDictation
 {
@@ -67,14 +67,16 @@ namespace RubyDictation
                     capture.Dispose();
                 };
 
-                Task task_record = Task.Run(() => {
+                Task task_record = Task.Run(() =>
+                {
                     StartRecording();
                 });
                 isRecording = true;
 
                 if (isRecordSilence)
                 {
-                    Task task_silence = Task.Run(() => {
+                    Task task_silence = Task.Run(() =>
+                    {
                         StartSine();
                     });
                 }

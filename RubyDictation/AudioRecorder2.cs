@@ -1,12 +1,6 @@
 ﻿using NAudio.CoreAudioApi;
 using NAudio.Wave;
-using NAudio.Wave.SampleProviders;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RubyDictation
 {
@@ -28,7 +22,7 @@ namespace RubyDictation
             waveIn = new WaveInEvent();
             // waveIn.WaveFormat = new WaveFormat(44100, WaveIn.GetCapabilities(0).Channels);
             // waveIn.WaveFormat = new WaveFormat(8*1000, WaveIn.GetCapabilities(0).Channels);
-            waveIn.WaveFormat = new WaveFormat(16 *1000, WaveIn.GetCapabilities(0).Channels);
+            waveIn.WaveFormat = new WaveFormat(16 * 1000, WaveIn.GetCapabilities(0).Channels);
             waveIn.StartRecording();
 
             // var bufferedWaveProvider = new BufferedWaveProvider(waveIn.WaveFormat);
@@ -51,7 +45,7 @@ namespace RubyDictation
 
         public void Stop()
         {
-            if(waveIn !=null) waveIn.StopRecording();
+            if (waveIn != null) waveIn.StopRecording();
         }
     }
 }

@@ -16,41 +16,36 @@ namespace RubyDictation
         private Uri nteUrl;
         HttpListener httpListener;
 
+        string receiveIp = "";
+        decimal receivePort = 0;
+
         public PostNTE(Form1 form1)
         {
             this.form1 = form1;
 
+            /*
             httpListener = new();
             httpListener.Prefixes.Add("http://+:3000/");
             // httpListener.Prefixes.Add("http://*:3000/");
             httpListener.Start();
             Debug.WriteLine("Listening...");
+            */
         }
 
-        private string getIp()
-        {
-            string result = "";
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
-            {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
-                    result = ip.ToString();
-            }
-            return result;
-        }
-
-        public void SetUrl(Uri uri)
+        public void SetUrl(Uri uri, string receiveIp, decimal receivePort)
         {
             nteUrl = uri;
+            this.receiveIp = receiveIp;
+            this.receivePort = receivePort;
         }
 
-        public async void Send(byte[] data)
+        public async void Send(byte[] data, string operatingMode, bool diarize)
         {
             var nteRequest = new NteRequest
             {
                 JobType = "batch_transcription",
-                OperatingMode = "fast",
-                CallbackUrl = $"http://{getIp()}:3000",
+                OperatingMode = operatingMode,
+                CallbackUrl = $"http://{receiveIp}:{receivePort}",
                 Model = new Model
                 {
                     Name = "jpn-jpn"
@@ -61,7 +56,7 @@ namespace RubyDictation
                     {
                         ResultFormat = "lattice+transcript", // "lattice",
                         Format = "audio/wav",
-                        Diarize = false,
+                        Diarize = diarize,
                     }
                 }
             };
@@ -96,7 +91,7 @@ namespace RubyDictation
 
         private async void Listen()
         {
-            var tcpListener = new TcpListener(IPAddress.Loopback, 3000);
+            var tcpListener = new TcpListener(IPAddress.Loopback, (int)receivePort);
             tcpListener.Start();
 
             while (true)
@@ -125,12 +120,13 @@ namespace RubyDictation
         {
             try
             {
-                // HttpListener httpListener = new();
-                // httpListener.Prefixes.Add("http://+:3000/");
+                // powershellで以下のコマンドを実行すること
+                // netsh http add urlacl url=http://+:3000/ user=everyone
+                httpListener = new();
+                httpListener.Prefixes.Add($"http://+:{receivePort}/");
                 // httpListener.Prefixes.Add("http://*:3000/");
-                // httpListener.Start();
-
-                // Debug.WriteLine("Listening...");
+                httpListener.Start();
+                Debug.WriteLine("Listening...");
 
                 /*
                 // Note: The GetContext method blocks while waiting for a request.

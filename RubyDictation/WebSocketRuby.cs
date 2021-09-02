@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.WebSockets;
@@ -6,7 +7,6 @@ using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 [JsonObject("RubyResponse")]
 class RubyResponse
@@ -86,7 +86,8 @@ class RubyBest
 
 
 [JsonObject("RubyWords")]
-class RubyWords {
+class RubyWords
+{
     [JsonProperty("confidence")]
     public float Confidence { get; set; }
 
@@ -112,7 +113,7 @@ namespace RubyDictation
     class WebSocketRuby
     {
         bool[] completeFlag = { false, false };
-        const int MessageBufferSize = 1024*10;
+        const int MessageBufferSize = 1024 * 10;
         readonly Form1 form1;
         private Uri rubyUrl;
 
@@ -145,8 +146,8 @@ namespace RubyDictation
         private async void Listen()
         {
             while (_ws.State == WebSocketState.Open)
-                {
-                    var buff = new ArraySegment<byte>(new byte[MessageBufferSize]);
+            {
+                var buff = new ArraySegment<byte>(new byte[MessageBufferSize]);
                 try
                 {
                     received = await _ws.ReceiveAsync(buff, CancellationToken.None);
@@ -156,16 +157,16 @@ namespace RubyDictation
                     Debug.WriteLine(e);
                 }
                 if (received.MessageType == WebSocketMessageType.Close)
-                    {
-                        Close("OK");
-                    }
+                {
+                    Close("OK");
+                }
 
-                    if (received.MessageType == WebSocketMessageType.Binary)
-                    {
-                        Close("I don't do binary");
-                    }
+                if (received.MessageType == WebSocketMessageType.Binary)
+                {
+                    Close("I don't do binary");
+                }
 
-                    string result = (new UTF8Encoding()).GetString(buff.Take(received.Count).ToArray());
+                string result = (new UTF8Encoding()).GetString(buff.Take(received.Count).ToArray());
 
                 RubyResponse json = new();
                 try
@@ -183,7 +184,7 @@ namespace RubyDictation
                     Debug.WriteLine($"Rudy Dictation String: {result}");
                 }
 
-                if(json == null)
+                if (json == null)
                 {
                     completeFlag = new bool[] { false, false };
                     Close(string.Empty);
@@ -202,7 +203,8 @@ namespace RubyDictation
                 string asrStatus = json.AsrStatus;
                 int ch = json.Ch;
 
-                if (asrStatus == "partial") {
+                if (asrStatus == "partial")
+                {
                     string text = json.Contexts[0].Text;
 
                     if (text == "") text = "(無音)";
@@ -239,7 +241,7 @@ namespace RubyDictation
 
                     completeFlag[ch] = true;
 
-                    if(ch==0) form1.rubyPartial1.Text = "話者１: (完了)";
+                    if (ch == 0) form1.rubyPartial1.Text = "話者１: (完了)";
                     else form1.rubyPartial2.Text = "話者２: (完了)";
 
                     if (completeFlag[0] == true && (completeFlag[1] == true || form1.ch1.Checked == true))
@@ -255,7 +257,7 @@ namespace RubyDictation
                         if (form1.rubyConsole.Text == "") form1.rubyConsole.Text = "テキストなし";
                     }
                 }
-                }
+            }
         }
 
         public async Task<string> SendText(string data)
@@ -293,7 +295,8 @@ namespace RubyDictation
         {
             if (_ws.State == WebSocketState.Open)
             {
-                try {
+                try
+                {
                     await _ws.CloseAsync(
                     WebSocketCloseStatus.NormalClosure,
                     data,
@@ -307,7 +310,7 @@ namespace RubyDictation
             }
         }
 
-        public  WebSocketState State()
+        public WebSocketState State()
         {
             return _ws.State;
         }

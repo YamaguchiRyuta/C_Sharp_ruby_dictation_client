@@ -75,7 +75,8 @@ class Transcript
 }
 
 [JsonObject("Alignment")]
-class Alignment{
+class Alignment
+{
     [JsonProperty("word")]
     public string Word { get; set; }
 
@@ -102,7 +103,8 @@ class Alignment{
 }
 
 [JsonObject("lattice")]
-class Lattice {
+class Lattice
+{
     /*
     [JsonProperty("1")]
     public string One {get;set;}

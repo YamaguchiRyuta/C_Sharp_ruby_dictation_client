@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
+using System.Net.Sockets;
 using System.Windows.Forms;
 
 
@@ -29,6 +31,11 @@ namespace RubyDictation
 
             bitGroupBox.Enabled = rawFormat.Checked;
             sampleRateGroupBox.Enabled = rawFormat.Checked;
+
+            nteDiarize.Enabled = !ch2.Checked;
+
+            NteReceiveIpTextBox.Text = getIp();
+            label4.Text = $"ファイアウォールの「受信の規則」に TCP: {NteReceivePort.Value} を追加してください";
         }
 
         public static byte[] ReadFile(string filePath)
@@ -95,28 +102,52 @@ namespace RubyDictation
             Debug.WriteLine(wsr.State());
 
             wsr.SetUrl(new Uri(rubyUrl.Text));
-            nte.SetUrl(new Uri(nteUrl.Text));
+            nte.SetUrl(new Uri(nteUrl.Text), NteReceiveIpTextBox.Text, NteReceivePort.Value);
 
             await wsr.Connect();
 
             await wsr.SendText("status");
             await wsr.SendText(rubyFormat.Text);
 
-            if (fileAudioInput.Checked==true)
+            if (fileAudioInput.Checked == true)
             {
                 byte[] data = ReadFile(audioPath.Text);
 
+                // Ruby
                 await wsr.SendBinary(data);
                 await wsr.SendText("complete");
 
-                nte.Send(data);
-                NteConsole.Text = "認識完了を待っています...";
+                // NTE
+                if (!mp3Format.Checked)
+                {
+                    string operatingMode = "";
+                    if (nteAccurate.Checked) operatingMode = "accurate";
+                    else if (nteFast.Checked) operatingMode = "fast";
+                    else if (nteWarp.Checked) operatingMode = "warp";
+
+                    bool diarize = nteDiarize.Checked;
+                    if (ch2.Checked) diarize = false;
+                    nte.Send(data, operatingMode, diarize);
+                    NteConsole.Text = "認識完了を待っています...";
+                }
             }
             else if (deviceAudioInput.Checked == true)
             {
                 audioRecorder.Setup();
             }
 
+        }
+
+        private string getIp()
+        {
+            string result = "192.168.0.0";
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork && ip.ToString().IndexOf("192.168") != -1)
+                    result = ip.ToString();
+            }
+            return result;
         }
 
         public void setNteConsoleText(string text)
@@ -178,6 +209,9 @@ namespace RubyDictation
 
         private void Mp3Format_CheckedChanged(object sender, EventArgs e)
         {
+            nteGroupBox.Enabled = !mp3Format.Checked;
+            nteResultGroupBox.Enabled = !mp3Format.Checked;
+
             GetRubyFormatString();
         }
 
@@ -188,6 +222,7 @@ namespace RubyDictation
 
         private void Ch2_CheckedChanged(object sender, EventArgs e)
         {
+            nteDiarize.Enabled = !ch2.Checked;
             GetRubyFormatString();
         }
 
@@ -227,6 +262,11 @@ namespace RubyDictation
             if (deviceAudioInput.Checked == true)
                 rubyFormat.Text = "format:pcm:16:16000:2";
             else rubyFormat.Text = GetRubyFormatString();
+        }
+
+        private void NteReceivePort_ValueChanged(object sender, EventArgs e)
+        {
+            label4.Text = $"ファイアウォールの「受信の規則」に TCP: {NteReceivePort.Value} を追加してください";
         }
     }
 }

@@ -49,18 +49,26 @@ namespace RubyDictation
             this.rubyIp = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.nteGroupBox = new System.Windows.Forms.GroupBox();
-            this.nteUrl = new System.Windows.Forms.Label();
+            this.NteReceive = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.NteReceivePort = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.NteReceiveIpTextBox = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.NteSend = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.ntePort = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.nteIp = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.nteSettingGroupBox = new System.Windows.Forms.GroupBox();
             this.operatingModeGroupBox = new System.Windows.Forms.GroupBox();
             this.nteWarp = new System.Windows.Forms.RadioButton();
             this.nteFast = new System.Windows.Forms.RadioButton();
             this.nteAccurate = new System.Windows.Forms.RadioButton();
             this.nteDiarize = new System.Windows.Forms.CheckBox();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.ntePort = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
-            this.nteIp = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.nteUrl = new System.Windows.Forms.Label();
             this.audioInputGroupBox = new System.Windows.Forms.GroupBox();
             this.deviceAudioInput = new System.Windows.Forms.RadioButton();
             this.fileAudioInput = new System.Windows.Forms.RadioButton();
@@ -91,10 +99,14 @@ namespace RubyDictation
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rubyPort)).BeginInit();
             this.nteGroupBox.SuspendLayout();
-            this.nteSettingGroupBox.SuspendLayout();
-            this.operatingModeGroupBox.SuspendLayout();
+            this.NteReceive.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NteReceivePort)).BeginInit();
+            this.NteSend.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ntePort)).BeginInit();
+            this.nteSettingGroupBox.SuspendLayout();
+            this.operatingModeGroupBox.SuspendLayout();
             this.audioInputGroupBox.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.sampleRateGroupBox.SuspendLayout();
@@ -110,7 +122,7 @@ namespace RubyDictation
             // recognizeButton
             // 
             this.recognizeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.recognizeButton.Location = new System.Drawing.Point(843, 432);
+            this.recognizeButton.Location = new System.Drawing.Point(840, 498);
             this.recognizeButton.Name = "recognizeButton";
             this.recognizeButton.Size = new System.Drawing.Size(75, 23);
             this.recognizeButton.TabIndex = 1;
@@ -127,7 +139,7 @@ namespace RubyDictation
             this.rubyConsole.Multiline = true;
             this.rubyConsole.Name = "rubyConsole";
             this.rubyConsole.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.rubyConsole.Size = new System.Drawing.Size(435, 62);
+            this.rubyConsole.Size = new System.Drawing.Size(433, 47);
             this.rubyConsole.TabIndex = 2;
             // 
             // rubyUrl
@@ -154,7 +166,7 @@ namespace RubyDictation
             // 
             this.rubyPartial1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.rubyPartial1.AutoSize = true;
-            this.rubyPartial1.Location = new System.Drawing.Point(12, 423);
+            this.rubyPartial1.Location = new System.Drawing.Point(12, 489);
             this.rubyPartial1.Margin = new System.Windows.Forms.Padding(3);
             this.rubyPartial1.Name = "rubyPartial1";
             this.rubyPartial1.Size = new System.Drawing.Size(49, 15);
@@ -165,7 +177,7 @@ namespace RubyDictation
             // 
             this.rubyPartial2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.rubyPartial2.AutoSize = true;
-            this.rubyPartial2.Location = new System.Drawing.Point(12, 444);
+            this.rubyPartial2.Location = new System.Drawing.Point(12, 510);
             this.rubyPartial2.Margin = new System.Windows.Forms.Padding(3);
             this.rubyPartial2.Name = "rubyPartial2";
             this.rubyPartial2.Size = new System.Drawing.Size(49, 15);
@@ -181,7 +193,7 @@ namespace RubyDictation
             this.NteConsole.Multiline = true;
             this.NteConsole.Name = "NteConsole";
             this.NteConsole.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.NteConsole.Size = new System.Drawing.Size(432, 62);
+            this.NteConsole.Size = new System.Drawing.Size(431, 47);
             this.NteConsole.TabIndex = 8;
             // 
             // settingTableLayoutPanel
@@ -197,7 +209,7 @@ namespace RubyDictation
             this.settingTableLayoutPanel.Name = "settingTableLayoutPanel";
             this.settingTableLayoutPanel.RowCount = 1;
             this.settingTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.settingTableLayoutPanel.Size = new System.Drawing.Size(905, 175);
+            this.settingTableLayoutPanel.Size = new System.Drawing.Size(902, 256);
             this.settingTableLayoutPanel.TabIndex = 12;
             // 
             // rubyGroupBox
@@ -211,7 +223,7 @@ namespace RubyDictation
             this.rubyGroupBox.Controls.Add(this.rubyUrl);
             this.rubyGroupBox.Location = new System.Drawing.Point(3, 3);
             this.rubyGroupBox.Name = "rubyGroupBox";
-            this.rubyGroupBox.Size = new System.Drawing.Size(446, 169);
+            this.rubyGroupBox.Size = new System.Drawing.Size(445, 250);
             this.rubyGroupBox.TabIndex = 10;
             this.rubyGroupBox.TabStop = false;
             this.rubyGroupBox.Text = "Ruby Dictation設定";
@@ -226,7 +238,7 @@ namespace RubyDictation
             this.rubySettingGroupBox.Controls.Add(this.rubyPunctuation);
             this.rubySettingGroupBox.Location = new System.Drawing.Point(6, 56);
             this.rubySettingGroupBox.Name = "rubySettingGroupBox";
-            this.rubySettingGroupBox.Size = new System.Drawing.Size(432, 64);
+            this.rubySettingGroupBox.Size = new System.Drawing.Size(431, 64);
             this.rubySettingGroupBox.TabIndex = 13;
             this.rubySettingGroupBox.TabStop = false;
             this.rubySettingGroupBox.Text = "設定";
@@ -288,12 +300,12 @@ namespace RubyDictation
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(432, 31);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(431, 31);
             this.tableLayoutPanel4.TabIndex = 12;
             // 
             // rubyPort
             // 
-            this.rubyPort.Location = new System.Drawing.Point(355, 3);
+            this.rubyPort.Location = new System.Drawing.Point(354, 3);
             this.rubyPort.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -329,7 +341,7 @@ namespace RubyDictation
             | System.Windows.Forms.AnchorStyles.Right)));
             this.rubyIp.Location = new System.Drawing.Point(43, 3);
             this.rubyIp.Name = "rubyIp";
-            this.rubyIp.Size = new System.Drawing.Size(266, 23);
+            this.rubyIp.Size = new System.Drawing.Size(265, 23);
             this.rubyIp.TabIndex = 0;
             this.rubyIp.Text = "192.168.13.20";
             this.rubyIp.TextChanged += new System.EventHandler(this.RubyIp_TextChanged);
@@ -339,7 +351,7 @@ namespace RubyDictation
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(320, 3);
+            this.label8.Location = new System.Drawing.Point(319, 3);
             this.label8.Margin = new System.Windows.Forms.Padding(3);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(29, 25);
@@ -352,24 +364,200 @@ namespace RubyDictation
             this.nteGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.nteGroupBox.Controls.Add(this.nteUrl);
-            this.nteGroupBox.Controls.Add(this.nteSettingGroupBox);
-            this.nteGroupBox.Controls.Add(this.tableLayoutPanel5);
-            this.nteGroupBox.Location = new System.Drawing.Point(455, 3);
+            this.nteGroupBox.Controls.Add(this.NteReceive);
+            this.nteGroupBox.Controls.Add(this.NteSend);
+            this.nteGroupBox.Location = new System.Drawing.Point(454, 3);
             this.nteGroupBox.Name = "nteGroupBox";
-            this.nteGroupBox.Size = new System.Drawing.Size(447, 169);
+            this.nteGroupBox.Size = new System.Drawing.Size(445, 250);
             this.nteGroupBox.TabIndex = 10;
             this.nteGroupBox.TabStop = false;
             this.nteGroupBox.Text = "NTE設定";
             // 
-            // nteUrl
+            // NteReceive
             // 
-            this.nteUrl.AutoSize = true;
-            this.nteUrl.Location = new System.Drawing.Point(10, 126);
-            this.nteUrl.Name = "nteUrl";
-            this.nteUrl.Size = new System.Drawing.Size(52, 15);
-            this.nteUrl.TabIndex = 14;
-            this.nteUrl.Text = "NTE URL";
+            this.NteReceive.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NteReceive.Controls.Add(this.label4);
+            this.NteReceive.Controls.Add(this.tableLayoutPanel1);
+            this.NteReceive.Location = new System.Drawing.Point(7, 157);
+            this.NteReceive.Name = "NteReceive";
+            this.NteReceive.Size = new System.Drawing.Size(432, 80);
+            this.NteReceive.TabIndex = 15;
+            this.NteReceive.TabStop = false;
+            this.NteReceive.Text = "認識結果受信設定(PCのIPアドレスを設定してください)";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 60);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 15);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "label4";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 4;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.Controls.Add(this.NteReceivePort, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.NteReceiveIpTextBox, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 22);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(420, 31);
+            this.tableLayoutPanel1.TabIndex = 12;
+            // 
+            // NteReceivePort
+            // 
+            this.NteReceivePort.Location = new System.Drawing.Point(343, 3);
+            this.NteReceivePort.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.NteReceivePort.Name = "NteReceivePort";
+            this.NteReceivePort.Size = new System.Drawing.Size(74, 23);
+            this.NteReceivePort.TabIndex = 14;
+            this.NteReceivePort.Value = new decimal(new int[] {
+            19901,
+            0,
+            0,
+            0});
+            this.NteReceivePort.ValueChanged += new System.EventHandler(this.NteReceivePort_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(20, 3);
+            this.label1.Margin = new System.Windows.Forms.Padding(3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(17, 25);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "IP";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NteReceiveIpTextBox
+            // 
+            this.NteReceiveIpTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NteReceiveIpTextBox.Location = new System.Drawing.Point(43, 3);
+            this.NteReceiveIpTextBox.Name = "NteReceiveIpTextBox";
+            this.NteReceiveIpTextBox.Size = new System.Drawing.Size(254, 23);
+            this.NteReceiveIpTextBox.TabIndex = 0;
+            this.NteReceiveIpTextBox.Text = "192.168.13.16";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(308, 3);
+            this.label2.Margin = new System.Windows.Forms.Padding(3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(29, 25);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Port";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NteSend
+            // 
+            this.NteSend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NteSend.Controls.Add(this.tableLayoutPanel5);
+            this.NteSend.Controls.Add(this.nteSettingGroupBox);
+            this.NteSend.Location = new System.Drawing.Point(9, 22);
+            this.NteSend.Name = "NteSend";
+            this.NteSend.Size = new System.Drawing.Size(430, 129);
+            this.NteSend.TabIndex = 15;
+            this.NteSend.TabStop = false;
+            this.NteSend.Text = "NTE送信先";
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel5.ColumnCount = 4;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel5.Controls.Add(this.ntePort, 3, 0);
+            this.tableLayoutPanel5.Controls.Add(this.label9, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.nteIp, 1, 0);
+            this.tableLayoutPanel5.Controls.Add(this.label10, 2, 0);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(6, 22);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 1;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(418, 31);
+            this.tableLayoutPanel5.TabIndex = 12;
+            // 
+            // ntePort
+            // 
+            this.ntePort.Location = new System.Drawing.Point(341, 3);
+            this.ntePort.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.ntePort.Name = "ntePort";
+            this.ntePort.Size = new System.Drawing.Size(74, 23);
+            this.ntePort.TabIndex = 14;
+            this.ntePort.Value = new decimal(new int[] {
+            19901,
+            0,
+            0,
+            0});
+            this.ntePort.ValueChanged += new System.EventHandler(this.ntePort_ValueChanged);
+            // 
+            // label9
+            // 
+            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(20, 3);
+            this.label9.Margin = new System.Windows.Forms.Padding(3);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(17, 25);
+            this.label9.TabIndex = 10;
+            this.label9.Text = "IP";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nteIp
+            // 
+            this.nteIp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.nteIp.Location = new System.Drawing.Point(43, 3);
+            this.nteIp.Name = "nteIp";
+            this.nteIp.Size = new System.Drawing.Size(252, 23);
+            this.nteIp.TabIndex = 0;
+            this.nteIp.Text = "192.168.13.17";
+            this.nteIp.TextChanged += new System.EventHandler(this.nteIp_TextChanged);
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(306, 3);
+            this.label10.Margin = new System.Windows.Forms.Padding(3);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(29, 25);
+            this.label10.TabIndex = 11;
+            this.label10.Text = "Port";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // nteSettingGroupBox
             // 
@@ -377,9 +565,10 @@ namespace RubyDictation
             | System.Windows.Forms.AnchorStyles.Right)));
             this.nteSettingGroupBox.Controls.Add(this.operatingModeGroupBox);
             this.nteSettingGroupBox.Controls.Add(this.nteDiarize);
-            this.nteSettingGroupBox.Location = new System.Drawing.Point(10, 56);
+            this.nteSettingGroupBox.Controls.Add(this.nteUrl);
+            this.nteSettingGroupBox.Location = new System.Drawing.Point(6, 58);
             this.nteSettingGroupBox.Name = "nteSettingGroupBox";
-            this.nteSettingGroupBox.Size = new System.Drawing.Size(432, 64);
+            this.nteSettingGroupBox.Size = new System.Drawing.Size(418, 64);
             this.nteSettingGroupBox.TabIndex = 13;
             this.nteSettingGroupBox.TabStop = false;
             this.nteSettingGroupBox.Text = "設定";
@@ -438,81 +627,14 @@ namespace RubyDictation
             this.nteDiarize.Text = "Diarization";
             this.nteDiarize.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel5
+            // nteUrl
             // 
-            this.tableLayoutPanel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel5.ColumnCount = 4;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel5.Controls.Add(this.ntePort, 3, 0);
-            this.tableLayoutPanel5.Controls.Add(this.label9, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.nteIp, 1, 0);
-            this.tableLayoutPanel5.Controls.Add(this.label10, 2, 0);
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(9, 22);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 1;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(432, 31);
-            this.tableLayoutPanel5.TabIndex = 12;
-            // 
-            // ntePort
-            // 
-            this.ntePort.Location = new System.Drawing.Point(355, 3);
-            this.ntePort.Maximum = new decimal(new int[] {
-            99999,
-            0,
-            0,
-            0});
-            this.ntePort.Name = "ntePort";
-            this.ntePort.Size = new System.Drawing.Size(74, 23);
-            this.ntePort.TabIndex = 14;
-            this.ntePort.Value = new decimal(new int[] {
-            19901,
-            0,
-            0,
-            0});
-            this.ntePort.ValueChanged += new System.EventHandler(this.ntePort_ValueChanged);
-            // 
-            // label9
-            // 
-            this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(20, 3);
-            this.label9.Margin = new System.Windows.Forms.Padding(3);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(17, 25);
-            this.label9.TabIndex = 10;
-            this.label9.Text = "IP";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // nteIp
-            // 
-            this.nteIp.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.nteIp.Location = new System.Drawing.Point(43, 3);
-            this.nteIp.Name = "nteIp";
-            this.nteIp.Size = new System.Drawing.Size(266, 23);
-            this.nteIp.TabIndex = 0;
-            this.nteIp.Text = "192.168.13.17";
-            this.nteIp.TextChanged += new System.EventHandler(this.nteIp_TextChanged);
-            // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(320, 3);
-            this.label10.Margin = new System.Windows.Forms.Padding(3);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(29, 25);
-            this.label10.TabIndex = 11;
-            this.label10.Text = "Port";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.nteUrl.AutoSize = true;
+            this.nteUrl.Location = new System.Drawing.Point(209, 16);
+            this.nteUrl.Name = "nteUrl";
+            this.nteUrl.Size = new System.Drawing.Size(52, 15);
+            this.nteUrl.TabIndex = 14;
+            this.nteUrl.Text = "NTE URL";
             // 
             // audioInputGroupBox
             // 
@@ -554,14 +676,14 @@ namespace RubyDictation
             | System.Windows.Forms.AnchorStyles.Right)));
             this.audioPath.Location = new System.Drawing.Point(9, 22);
             this.audioPath.Name = "audioPath";
-            this.audioPath.Size = new System.Drawing.Size(802, 23);
+            this.audioPath.Size = new System.Drawing.Size(799, 23);
             this.audioPath.TabIndex = 14;
             this.audioPath.Text = "D:\\共有フォルダ\\サウンド\\１秒音声ステレオ.wav";
             // 
             // selectButton
             // 
             this.selectButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.selectButton.Location = new System.Drawing.Point(817, 21);
+            this.selectButton.Location = new System.Drawing.Point(814, 21);
             this.selectButton.Name = "selectButton";
             this.selectButton.Size = new System.Drawing.Size(75, 23);
             this.selectButton.TabIndex = 15;
@@ -744,7 +866,7 @@ namespace RubyDictation
             this.inputAudioSettingGroupBox.Controls.Add(this.groupBox5);
             this.inputAudioSettingGroupBox.Location = new System.Drawing.Point(12, 12);
             this.inputAudioSettingGroupBox.Name = "inputAudioSettingGroupBox";
-            this.inputAudioSettingGroupBox.Size = new System.Drawing.Size(904, 122);
+            this.inputAudioSettingGroupBox.Size = new System.Drawing.Size(901, 122);
             this.inputAudioSettingGroupBox.TabIndex = 17;
             this.inputAudioSettingGroupBox.TabStop = false;
             this.inputAudioSettingGroupBox.Text = "入力音声設定";
@@ -760,11 +882,11 @@ namespace RubyDictation
             this.resultTableLayoutPanel.Controls.Add(this.rubyResultGroupBox, 0, 0);
             this.resultTableLayoutPanel.Controls.Add(this.nteResultGroupBox, 1, 0);
             this.resultTableLayoutPanel.Enabled = false;
-            this.resultTableLayoutPanel.Location = new System.Drawing.Point(12, 321);
+            this.resultTableLayoutPanel.Location = new System.Drawing.Point(12, 402);
             this.resultTableLayoutPanel.Name = "resultTableLayoutPanel";
             this.resultTableLayoutPanel.RowCount = 1;
             this.resultTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.resultTableLayoutPanel.Size = new System.Drawing.Size(906, 96);
+            this.resultTableLayoutPanel.Size = new System.Drawing.Size(903, 81);
             this.resultTableLayoutPanel.TabIndex = 18;
             // 
             // rubyResultGroupBox
@@ -775,7 +897,7 @@ namespace RubyDictation
             this.rubyResultGroupBox.Controls.Add(this.rubyConsole);
             this.rubyResultGroupBox.Location = new System.Drawing.Point(3, 3);
             this.rubyResultGroupBox.Name = "rubyResultGroupBox";
-            this.rubyResultGroupBox.Size = new System.Drawing.Size(447, 90);
+            this.rubyResultGroupBox.Size = new System.Drawing.Size(445, 75);
             this.rubyResultGroupBox.TabIndex = 0;
             this.rubyResultGroupBox.TabStop = false;
             this.rubyResultGroupBox.Text = "Ruby Dictation結果";
@@ -786,9 +908,9 @@ namespace RubyDictation
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.nteResultGroupBox.Controls.Add(this.NteConsole);
-            this.nteResultGroupBox.Location = new System.Drawing.Point(456, 3);
+            this.nteResultGroupBox.Location = new System.Drawing.Point(454, 3);
             this.nteResultGroupBox.Name = "nteResultGroupBox";
-            this.nteResultGroupBox.Size = new System.Drawing.Size(447, 90);
+            this.nteResultGroupBox.Size = new System.Drawing.Size(446, 75);
             this.nteResultGroupBox.TabIndex = 0;
             this.nteResultGroupBox.TabStop = false;
             this.nteResultGroupBox.Text = "NTE結果";
@@ -797,7 +919,7 @@ namespace RubyDictation
             // 
             this.RecognizeStopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.RecognizeStopButton.Enabled = false;
-            this.RecognizeStopButton.Location = new System.Drawing.Point(762, 432);
+            this.RecognizeStopButton.Location = new System.Drawing.Point(759, 498);
             this.RecognizeStopButton.Name = "RecognizeStopButton";
             this.RecognizeStopButton.Size = new System.Drawing.Size(75, 23);
             this.RecognizeStopButton.TabIndex = 1;
@@ -809,7 +931,7 @@ namespace RubyDictation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(930, 467);
+            this.ClientSize = new System.Drawing.Size(927, 533);
             this.Controls.Add(this.rubyPartial2);
             this.Controls.Add(this.resultTableLayoutPanel);
             this.Controls.Add(this.inputAudioSettingGroupBox);
@@ -828,14 +950,19 @@ namespace RubyDictation
             this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rubyPort)).EndInit();
             this.nteGroupBox.ResumeLayout(false);
-            this.nteGroupBox.PerformLayout();
+            this.NteReceive.ResumeLayout(false);
+            this.NteReceive.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NteReceivePort)).EndInit();
+            this.NteSend.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ntePort)).EndInit();
             this.nteSettingGroupBox.ResumeLayout(false);
             this.nteSettingGroupBox.PerformLayout();
             this.operatingModeGroupBox.ResumeLayout(false);
             this.operatingModeGroupBox.PerformLayout();
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ntePort)).EndInit();
             this.audioInputGroupBox.ResumeLayout(false);
             this.audioInputGroupBox.PerformLayout();
             this.groupBox5.ResumeLayout(false);
@@ -916,6 +1043,14 @@ namespace RubyDictation
         public System.Windows.Forms.Button recognizeButton;
         public System.Windows.Forms.Button RecognizeStopButton;
         private System.Windows.Forms.Label nteUrl;
+        private System.Windows.Forms.GroupBox NteSend;
+        private System.Windows.Forms.GroupBox NteReceive;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.NumericUpDown NteReceivePort;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox NteReceiveIpTextBox;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
     }
 }
 
